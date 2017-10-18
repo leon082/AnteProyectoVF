@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head></h:head>    
+    <h:body>
+        <ui:composition template="./TEMPLATES/Home.xhtml">
+            <ui:define name="content">
+                <h:form id="new3" enctype="multipart/form-data">
+                    <p:growl id="growl" life="7000"/>
+                    <!-- forma-->
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:dataTable var="met" style="width:80%" value="#{listadoProyectoBean.listaMetodologias}">
+                                <f:facet name="header">
+                                    Primer corte
+                                </f:facet>
+
+                                <p:column headerText="Descripción">
+                                    <h:outputText value="#{met.descripcion}" />
+                                </p:column>
+
+                                <p:column headerText="%">
+                                    <h:outputText value="#{met.porcentaje}" />    
+                                </p:column>                        
+                            </p:dataTable>
+                        </h:panelGrid>     
+                        <h:panelGrid columns="3" cellpadding="5">  
+                            <p:fileUpload id="file1" mode="advanced" auto="true" 
+                                          label="Seleccionar" uploadLabel="Subir" fileUploadListener="#{listadoProyectoBean.handleFileUpload}"/>
+                            <p:commandButton value="Download" ajax="false" icon="ui-icon-arrowthick-1-s">
+                                <p:fileDownload value="#{listadoProyectoBean.prepDownload(listadoProyectoBean.urlFile1)}" />
+                            </p:commandButton>
+                            <p:inputTextarea  value="#{listadoProyectoBean.observacion1}" />                           
+                            <p:commandButton value="Enviar" id="btnFile1" ajax="false" actionListener="#{listadoProyectoBean.crearEntrega(listadoProyectoBean.auxCodProyecto)}" update="growl" />
+                            <p:outputLabel value="Nota:" />
+                            <p:inputText  value="#{listadoProyectoBean.calificacion1}"/>
+                        </h:panelGrid>
+                    </h:panelGrid> 
+
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:dataTable var="met" style="width:80%" value="#{listadoProyectoBean.listaMetodologias2}">
+                                <f:facet name="header">
+                                    Segundo corte
+                                </f:facet>
+
+                                <p:column headerText="Descripción">
+                                    <h:outputText value="#{met.descripcion}" />
+                                </p:column>
+
+                                <p:column headerText="%">
+                                    <h:outputText value="#{met.porcentaje}" />    
+                                </p:column>                        
+                            </p:dataTable>
+                        </h:panelGrid>     
+                        <h:panelGrid columns="3" cellpadding="5">                            
+                            <p:fileUpload id="file2" mode="advanced" auto="true" 
+                                          label="Seleccionar" uploadLabel="Subir" fileUploadListener="#{listadoProyectoBean.handleFileUpload}"/>
+
+                            <p:commandButton value="Download" ajax="false" icon="ui-icon-arrowthick-1-s">
+                                <p:fileDownload value="#{listadoProyectoBean.prepDownload(listadoProyectoBean.urlFile2)}" />
+                            </p:commandButton>
+                            <p:inputTextarea  value="#{listadoProyectoBean.observacion2}"/>                           
+                            <p:commandButton value="Enviar" id="btnFile2" ajax="false" actionListener="#{listadoProyectoBean.crearEntrega2(listadoProyectoBean.auxCodProyecto)}" update="growl" />                                
+                            <p:outputLabel value="Nota:"/>
+                            <p:inputText  value="#{listadoProyectoBean.calificacion2}"/>
+                        </h:panelGrid>
+                    </h:panelGrid> 
+
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:dataTable var="met" style="width:80%" value="#{listadoProyectoBean.listaMetodologias3}">
+                                <f:facet name="header">
+                                    Tercer corte
+                                </f:facet>
+
+                                <p:column headerText="Descripción">
+                                    <h:outputText value="#{met.descripcion}" />
+                                </p:column>
+
+                                <p:column headerText="%">
+                                    <h:outputText value="#{met.porcentaje}" />    
+                                </p:column>                        
+                            </p:dataTable>
+                        </h:panelGrid>     
+                        <h:panelGrid columns="3" cellpadding="5">                            
+                            <p:fileUpload id="file3" mode="advanced" auto="true" 
+                                          label="Seleccionar" uploadLabel="Subir" fileUploadListener="#{listadoProyectoBean.handleFileUpload}"/>
+                            <p:commandButton value="Download" ajax="false" icon="ui-icon-arrowthick-1-s">
+                                <p:fileDownload value="#{listadoProyectoBean.prepDownload(listadoProyectoBean.urlFile3)}" />
+                            </p:commandButton>
+                            <p:inputTextarea value="#{listadoProyectoBean.observacion3}"/>                           
+                            <p:commandButton value="Enviar" id="btnFile3" ajax="false" actionListener="#{listadoProyectoBean.crearEntrega3(listadoProyectoBean.auxCodProyecto)}" update="growl" />                                
+                            <p:outputLabel value="Nota:" />
+                            <p:inputText  value="#{listadoProyectoBean.calificacion3}"/>
+                        </h:panelGrid>
+                    </h:panelGrid>                    
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <body>
+        <ui:composition template="./TEMPLATES/Home.xhtml">
+            <ui:define name="content">
+                <h:form id="forma2">
+                    <p:growl id="grow" showDetail="true" life="5555"/>  
+
+                    <p:tabView id="tab">
+
+
+                        <p:tab title="Corte 1"> <!-- Nombre  -->
+                        <h:panelGrid columns="4" cellpadding="5">
+                         <p:outputLabel for="add_4" value="Calificacion :" />
+                              <p:outputLabel id="add_4" value="5.0" />  
+                         </h:panelGrid>
+                            <p:dataTable id="listaLineamientoCort1" value="#{proyectoGestionBean.lineamientoDetalleCort1}"
+                                         var="lineamientoCort1" 
+                                         paginator="true" 
+                                         rows="20" 
+                                         editable="true"
+                                         paginatorPosition="bottom"
+                                         >
+                                <p:column headerText="Descripcion">
+                                    <p:outputLabel value="#{lineamientoCort1.descripcion}"></p:outputLabel>
+                                </p:column>
+
+                                <p:column headerText="Porcentaje">
+                                    <p:outputLabel value="#{lineamientoCort1.porcentaje}"></p:outputLabel>
+                                </p:column>                   
+
+                            </p:dataTable>
+                        </p:tab>
+
+                    </p:tabView>
+                </h:form>
+
+                <h:form id="forma3">
+                    <p:growl id="grow" showDetail="true" life="5555"/>  
+
+                    <p:tabView id="tab">
+                         <p:tab title="Corte 2"> <!-- Nombre  -->
+                                   <h:panelGrid columns="4" cellpadding="5">
+                         <p:outputLabel for="add_5" value="Calificacion :" />
+                              <p:outputLabel id="add_5" value="5.0" />  
+                         </h:panelGrid>            
+                            <p:dataTable id="listaLineamientoCort2" value="#{proyectoGestionBean.lineamientoDetalleCort2}"
+                                         var="lineamientoCort2" 
+                                         paginator="true" 
+                                         rows="20" 
+                                         editable="true"
+                                         paginatorPosition="bottom"
+                                         >
+                                <p:column headerText="Descripcion">
+                                    <p:outputLabel value="#{lineamientoCort2.descripcion}"></p:outputLabel>
+                                </p:column>
+
+                                <p:column headerText="Porcentaje">
+                                    <p:outputLabel value="#{lineamientoCort2.porcentaje}"></p:outputLabel>
+                                </p:column>                   
+
+                            </p:dataTable>
+                        </p:tab>
+
+                    </p:tabView>
+                </h:form>
+
+                <h:form id="forma4">
+                    <p:growl id="grow" showDetail="true" life="5555"/>  
+
+                    <p:tabView id="tab">
+                        
+
+                        <p:tab title="Corte 3"> <!-- Nombre  -->
+                            <h:panelGrid columns="4" cellpadding="5">
+                         <p:outputLabel for="add_6" value="Calificacion :" />
+                              <p:outputLabel id="add_6" value="5.0" />  
+                         </h:panelGrid>
+                            <p:dataTable id="listaLineamientoCort3" value="#{proyectoGestionBean.lineamientoDetalleCort3}"
+                                         var="lineamientoCort3" 
+                                         paginator="true" 
+                                         rows="20" 
+                                         editable="true"
+                                         paginatorPosition="bottom"
+                                         >
+                                <p:column headerText="Descripcion">
+                                    <p:outputLabel value="#{lineamientoCort3.descripcion}"></p:outputLabel>
+                                </p:column>
+
+                                <p:column headerText="Porcentaje">
+                                    <p:outputLabel value="#{lineamientoCort3.porcentaje}"></p:outputLabel>
+                                </p:column>                   
+
+                            </p:dataTable>
+                        </p:tab>
+
+                    </p:tabView>
+                </h:form>
+                <h:form id="forma5">
+                    <p:growl id="grow" showDetail="true" life="5555"/>  
+
+                    <p:tabView id="tab">
+
+
+                        <p:tab title="Entrega"> <!-- Nombre  -->
+                            
+                             <h:panelGrid columns="4" cellpadding="5">
+                         <p:outputLabel for="add_7" value="Corte :" />
+                         <p:selectOneMenu  id="add_7" value="#{proyectoGestionBean.v_select_corte}" required="true" requiredMessage="Campo requerido">  
+                                <f:selectItem itemLabel="Seleccione" itemValue="" />  
+                                <f:selectItems value="#{proyectoGestionBean.itemsCorte}"/>  
+                        </p:selectOneMenu>       
+                         </h:panelGrid>
+                             <p:separator />
+                            
+                            <p:dataTable id="listaLineamientoCort3" value="#{proyectoGestionBean.lineamientoDetalleCort3}"
+                                         var="lineamientoCort3" 
+                                         paginator="true" 
+                                         rows="20" 
+                                         editable="true"
+                                         paginatorPosition="bottom"
+                                         >
+                                <p:column headerText="Descripcion">
+                                    <p:outputLabel value="#{lineamientoCort3.descripcion}"></p:outputLabel>
+                                </p:column>
+
+                                <p:column headerText="Porcentaje">
+                                    <p:outputLabel value="#{lineamientoCort3.porcentaje}"></p:outputLabel>
+                                </p:column>                   
+
+                            </p:dataTable>
+                        </p:tab>
+
+                    </p:tabView>
+                </h:form>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

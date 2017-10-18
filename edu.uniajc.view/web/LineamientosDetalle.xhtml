@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+   
+
+    <h:body>
+         
+        <h:form>
+            <p:remoteCommand name="onload" actionListener="#{lineamientoDetalleBean.ejecuteMetodos}" autoRun="true" />
+        </h:form>
+        
+        <ui:composition template="./TEMPLATES/Home.xhtml">
+            <ui:define name="content">
+               <h:form id="forma">
+            
+            <p:growl id="grow" showDetail="true" life="5555"/>  
+            <p:panel header="Lineamiento">
+                <p:outputLabel value="#{lineamientoDetalleBean.lineamiento.descripcion}" style="font-family: Arial; font-size: 20pt; width:110px " />
+            </p:panel>
+            <p:tabView id="tab">
+                
+                
+                <p:tab title="Gestion Detalles Lineamientos"> <!-- Nombre  -->
+                    <h:panelGrid columns="4" cellpadding="5">
+                        
+                      
+                        
+                        <p:outputLabel for="add_2" value="Descripcion :" />
+                        <p:inputText   id="add_2" value="#{lineamientoDetalleBean.lineamientoDetalle.descripcion}" 
+                                       required="true" requiredMessage="Campo requerido"/>                       
+                        
+                        <p:outputLabel for="add_3" value="Porcentaje :" />
+                        <p:spinner   id="add_3" value="#{lineamientoDetalleBean.lineamientoDetalle.porcentaje}"  min="1" max="100" required="true" requiredMessage="Campo requerido">
+                        </p:spinner>
+                        
+                        <p:outputLabel for="add_4" value="Corte :" />
+                        
+                        <p:selectOneMenu  id="add_4" value="#{lineamientoDetalleBean.v_select_corte}" required="true" requiredMessage="Campo requerido">  
+                                <f:selectItem itemLabel="Seleccione" itemValue="" />  
+                                <f:selectItems value="#{lineamientoDetalleBean.itemsCorte}"/>  
+                        </p:selectOneMenu> 
+                        
+                        <p:outputLabel for="add_5" value="Porcentaje Actual :" />
+                        <p:outputLabel   id="add_5" value="#{lineamientoDetalleBean.porcentajeActual}" /> 
+                        
+                        
+              
+                    </h:panelGrid>
+                    <p:separator />
+                    
+                    <!-- Se actulizan los formularios  forma y forma2 para limpiar y mostrar cambios -->
+                    <p:commandButton 
+                        update=":forma:grow,:forma:tab:add_2,:forma:tab:add_3,:forma:tab:add_4,:forma:tab:add_5,:forma2:listaLineamientoDetalle"
+                        ajax="true" value="Crear" action="#{lineamientoDetalleBean.crear}" icon="ui-icon-folder-open"
+                        
+                                      />
+                    
+                            <p:button outcome="Lineamientos.xhtml" value="Volver" icon="ui-icon-home">
+                               
+                                    </p:button>
+                    
+                </p:tab>
+
+            </p:tabView>
+
+        </h:form>
+
+	<h:form id="forma2">
+
+            <p:dataTable id="listaLineamientoDetalle" value="#{lineamientoDetalleBean.listalineamientoDetalle}"
+			var="lineamientoDetalle" 
+                        paginator="true" 
+                        rows="20" 
+                        editable="true"
+                        paginatorPosition="bottom"
+                        widgetVar="tabla"
+                        >
+                
+                
+             
+                        
+                       <p:ajax event="rowEdit" listener="#{lineamientoDetalleBean.modificar}" update=":forma:tab:add_5,:forma:grow" />
+
+                       <p:column style="width:110px" headerText="Codigo Lineamiento" filterBy="#{lineamientoDetalle.id}"  filterMatchMode="contains" >
+                           <p:outputLabel value="#{lineamientoDetalle.id}"></p:outputLabel>
+                         
+                           
+                          
+			</p:column>
+                       
+                       
+                       
+			<p:column style="width:100px" headerText="Descripciones ">
+                             <p:cellEditor>
+                                 <f:facet name="output"><h:outputText value="#{lineamientoDetalle.descripcion}" /></f:facet>
+                               <f:facet name="input">
+                                  <p:inputText id="modeldescripcion" value="#{lineamientoDetalle.descripcion}" required="true" requiredMessage="Campo requerido" />
+                               </f:facet>
+                            </p:cellEditor>
+			</p:column>
+                       
+                       <p:column style="width:100px" headerText="Porcentaje ">
+                             <p:cellEditor>
+                                 <f:facet name="output"><h:outputText value="#{lineamientoDetalle.porcentaje}" /></f:facet>
+                               <f:facet name="input">
+                                   <p:spinner id="modelporcentaje" value="#{lineamientoDetalle.porcentaje}" min="1" max="100" required="true" requiredMessage="Campo requerido" />
+                               </f:facet>
+                            </p:cellEditor>
+			</p:column>
+                       
+                                             
+                       <p:column style="width:50px" headerText="Corte" >
+                         <p:cellEditor>
+                             <f:facet name="output"><h:outputText value="#{lineamientoDetalle.corte}" /></f:facet>
+                           <f:facet name="input">
+                               <h:selectOneMenu value="#{lineamientoDetalle.corte}" required="true" requiredMessage="Campo requerido">  
+                                   <f:selectItems value="#{lineamientoDetalleBean.itemsCorte}"/>  
+                              </h:selectOneMenu> 
+                           </f:facet>
+                         </p:cellEditor>
+			</p:column> 
+                       
+                       <p:column  headerText="Creado Por">
+                          <p:outputLabel value="#{lineamientoDetalle.creadoPor}"></p:outputLabel>
+                  
+			</p:column>
+                    
+                       <p:column  headerText="Creado En">
+                          <p:outputLabel value="#{lineamientoDetalle.creadoEn}"></p:outputLabel>
+                  
+			</p:column>
+                        
+                       <p:column  headerText="Modificado Por">
+                          <p:outputLabel value="#{lineamientoDetalle.modificadoPor}"></p:outputLabel>
+                  
+			</p:column>
+                       
+                          <p:column  headerText="Modificado En">
+                          <p:outputLabel value="#{lineamientoDetalle.modificadoEn}"></p:outputLabel>
+                  
+			</p:column>               
+                         
+
+			
+
+                      <!-- Editar 
+                        <p:column style="width:30px">
+                             <p:commandButton 
+                              update=":forma:grow,:forma2:listaLineamientoDetalle"
+                              ajax="true" icon="ui-icon-pencil"
+                              action="#{lineamientoDetalleBean.modificar(lineamientoDetalle.id)}" />
+                        </p:column>-->
+                      <p:column style="width:30px" exportable="false">
+                          <p:rowEditor />
+                        </p:column>
+                        <!-- Borrar -->
+                        <p:column headerText="" style="width:30px" exportable="false" >
+                            <p:commandButton 
+                              update=":forma:grow,:forma:tab:add_5,:forma2:listaLineamientoDetalle"
+                              ajax="true" icon="ui-icon-trash"
+                              action="#{lineamientoDetalleBean.eliminar(lineamientoDetalle.id)}" />
+			</p:column> 
+                        
+                
+		</p:dataTable>
+            
+                             <h:commandLink>
+                            <h:graphicImage url="resources/image/XLS.png" width="50"/>
+                            <p:dataExporter type="xls" target="listaLineamientoDetalle" fileName="Lineamientos"/>
+                            </h:commandLink>
+            
+                            <h:commandLink>
+                            <h:graphicImage url="resources/image/pdf.png" width="50"/>
+                            <p:dataExporter type="pdf" target="listaLineamientoDetalle" fileName="Lineamientos"/>
+                            </h:commandLink>
+           
+                           
+	</h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
